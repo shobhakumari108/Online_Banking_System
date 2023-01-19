@@ -4,12 +4,12 @@ public class Accountant {
    private int AccountNo;
    private String Name;
    private String Username;
-   private int password;
+   private String password;
 public Accountant() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Accountant(int accountNo, String name, String username, int password) {
+public Accountant(int accountNo, String name, String username, String password) {
 	super();
 	AccountNo = accountNo;
 	Name = name;
@@ -39,14 +39,12 @@ public String getUsername() {
 public void setUsername(String username) {
 	Username = username;
 }
-public int getPassword() {
+public String getPassword() {
 	return password;
 }
-public void setPassword(int password) {
+public void setPassword(String password) {
 	this.password = password;
 }
-   
-   
-   
+
    
 }

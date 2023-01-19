@@ -1,0 +1,84 @@
+ create database  onlinebankingsystem; |
+
+
+create table customer(
+    Id int auto_increment,
+    name varchar(30) not null,
+    username varchar(55) not null unique,
+    password varchar(45) not null,
+    primary key(id)
+
+   );
+   
+   desc customer;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| Id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(30) | NO   |     | NULL    |                |
+| username | varchar(55) | NO   | UNI | NULL    |                |
+| password | varchar(45) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.04 sec)
+
+*****************************************************************************************
+
+
+create table accountant (
+    account_no int primary key auto_increment,
+    customerId int not null,
+    balance bigint default 0,
+    loan varchar(30) default 'no loan',
+    FOREIGN KEY (customerId) REFERENCES customer(Id)
+    
+     );
+     mysql> desc accountant;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| account_no | int         | NO   | PRI | NULL    | auto_increment |
+| customerId | int         | NO   | MUL | NULL    |                |
+| balance    | bigint      | YES  |     | 0       |                |
+| loan       | varchar(30) | YES  |     | no loan |                |
++------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+************************************************************************************
+
+
+create table transaction(
+
+    id int primary key auto_increment,
+    amount bigint not null,
+    account_no int not null,
+    receiver int not null,
+    date date not null,
+    foreign key (account_no) references accountant(account_no)
+
+
+   );
+   
+   mysql> desc transaction;
++------------+--------+------+-----+---------+----------------+
+| Field      | Type   | Null | Key | Default | Extra          |
++------------+--------+------+-----+---------+----------------+
+| id         | int    | NO   | PRI | NULL    | auto_increment |
+| amount     | bigint | NO   |     | NULL    |                |
+| account_no | int    | NO   | MUL | NULL    |                |
+| receiver   | int    | NO   |     | NULL    |                |
+| date       | date   | NO   |     | NULL    |                |
++------------+--------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+**********************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+

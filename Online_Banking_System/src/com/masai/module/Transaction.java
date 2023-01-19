@@ -1,24 +1,35 @@
 package com.masai.module;
 
+import java.security.Timestamp;
+
 public class Transaction {
+	private int Trans_ID;
    private String Sender;
    private String Receiver ;
    private int Amount;
-   private int Data;
+   private Timestamp transactionTime;
 public Transaction() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Transaction(String sender, String receiver, int amount, int data) {
+public Transaction(int trans_ID, String sender, String receiver, int amount, Timestamp transactionTime) {
 	super();
+	Trans_ID = trans_ID;
 	Sender = sender;
 	Receiver = receiver;
 	Amount = amount;
-	Data = data;
+	this.transactionTime = transactionTime;
 }
 @Override
 public String toString() {
-	return "Transaction [Sender=" + Sender + ", Receiver=" + Receiver + ", Amount=" + Amount + ", Data=" + Data + "]";
+	return "Transaction [Trans_ID=" + Trans_ID + ", Sender=" + Sender + ", Receiver=" + Receiver + ", Amount=" + Amount
+			+ ", transactionTime=" + transactionTime + "]";
+}
+public int getTrans_ID() {
+	return Trans_ID;
+}
+public void setTrans_ID(int trans_ID) {
+	Trans_ID = trans_ID;
 }
 public String getSender() {
 	return Sender;
@@ -38,12 +49,11 @@ public int getAmount() {
 public void setAmount(int amount) {
 	Amount = amount;
 }
-public int getData() {
-	return Data;
+public Timestamp getTransactionTime() {
+	return transactionTime;
 }
-public void setData(int data) {
-	Data = data;
+public void setTransactionTime(Timestamp transactionTime) {
+	this.transactionTime = transactionTime;
 }
-   
    
 }
