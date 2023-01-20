@@ -7,18 +7,18 @@ public class Transaction {
    private String Sender;
    private String Receiver ;
    private int Amount;
-   private Timestamp transactionTime;
+   private java.sql.Timestamp transactionTime;
 public Transaction() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Transaction(int trans_ID, String sender, String receiver, int amount, Timestamp transactionTime) {
+public Transaction(int trans_ID, String sender, String receiver, int amount, java.sql.Timestamp transactionTime2) {
 	super();
 	Trans_ID = trans_ID;
 	Sender = sender;
 	Receiver = receiver;
 	Amount = amount;
-	this.transactionTime = transactionTime;
+	this.transactionTime = transactionTime2;
 }
 @Override
 public String toString() {
@@ -49,10 +49,10 @@ public int getAmount() {
 public void setAmount(int amount) {
 	Amount = amount;
 }
-public Timestamp getTransactionTime() {
+public java.sql.Timestamp getTransactionTime() {
 	return transactionTime;
 }
-public void setTransactionTime(Timestamp transactionTime) {
+public void setTransactionTime(java.sql.Timestamp transactionTime) {
 	this.transactionTime = transactionTime;
 }
    
