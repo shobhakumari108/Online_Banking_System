@@ -70,11 +70,40 @@ create table transaction(
 5 rows in set (0.01 sec)
 **********************************************************************************
 
+*************************************************************************************
 
 
+1.
+create Table Accountant(
+AccountNo int primary key Auto_increment,
+Name varchar(30),
+UserName varchar(30) unique,
+password int unique
+);
+
+2.
+create Table Customer(
+CustomerID int  primary key Auto_increment,
+name varchar(30) ,
+UserName varchar(30) unique,
+password int unique,
+AccountNo int unique,
+Amount int unique
+)
+
+create table transaction(
+Trans_ID int primary key Auto_increment,
+Sender varchar(40),
+Receiver varchar(40),
+Amount int ,
+data varchar(60)
+)
+UPDATE Customer SET name = ? , UserName = ?,Password=?,AccountNo=?,Amount=? WHERE cid = ?;
+
+insert into Accountant values(1,'shobha', 'Shobha@1384', 678); 
 
 
-
+insert into Customer values(1, 'shobha', 'shobha@1384', 123, 12345, 10000);
 
 
 

@@ -21,13 +21,13 @@ import com.masai.utility.DBUtil;
 public class AccountantDaoImplement implements AccountantDao {
    boolean flag = false;
    @Override
-	public boolean LoginAccountant(String Username, String Password) throws AccountntException {
+	public boolean LoginAccountant(String Username, int Password) throws AccountntException {
 		// TODO Auto-generated method stub
 	   
 	   try(Connection conn = DBUtil.provideConnection()){
 			PreparedStatement ps = conn.prepareStatement("select * from Accountant where Username=? and password=?");
 			ps.setString(1, Username);
-			ps.setString(2, Password);
+			ps.setInt(2, Password);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -46,22 +46,22 @@ public class AccountantDaoImplement implements AccountantDao {
 
 
 	@Override
-	public boolean InsertCustomer(String Name, String Username, String password, int AccountNo, int Amount)
+	public int InsertCustomer(String Name, String Username, int password, int AccountNo, int Amount)
 			throws CustomerException {
 		// TODO Auto-generated method stub
-		boolean flag = false;
+		int res=0;
 		try(Connection conn = DBUtil.provideConnection()){
-			PreparedStatement ps = conn.prepareStatement("insert into Customer (name,username,password,AccountNo,Amount) values(?,?,?,?,?");
+			PreparedStatement ps = conn.prepareStatement("insert into Customer (name,username,password,AccountNo,Amount) values(?,?,?,?,?)");
 			ps.setString(1, Name);
 			ps.setString(2, Username);
-			ps.setString(3, password);
+			ps.setInt(3, password);
 			ps.setInt(4, AccountNo);
 			ps.setInt(5, Amount);
 			
 			int A = ps.executeUpdate();
 			
 			if(A > 0) {
-		       flag = true;
+		      res++;
 			}else {
 				throw new CustomerException("username or passwod is wrong...");
 			}
@@ -70,25 +70,25 @@ public class AccountantDaoImplement implements AccountantDao {
 			// TODO Auto-generated catch block
 			throw new CustomerException(e.getMessage());
 		}
-		return flag;
+		return res;
 	}
 
 	@Override
-	public boolean UpdateCusomer(String Name, String Username, String password, int AccountNo, int Amount, int Trans_ID)
+	public int UpdateCusomer(String Name, String Username, int password, int AccountNo, int Amount, int Trans_ID)
 			throws CustomerException {
 		// TODO Auto-generated method stub
-		boolean flag = false;
+		int res=0;
 		
 		
 		
 		try(Connection conn = DBUtil.provideConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
 					
-					"update Customer setName = ?, Username = ?, password = ?, "
-					+ "AccountNo = ?, Amount = ? where AccountNo=?");
+					"update Customer set Name = ?, Username = ?, password = ?, "
+					+ "AccountNo = ?, Amount = ? where CustomerID=?");
 			ps.setString(1, Name);
 			ps.setString(2, Username);
-			ps.setString(3, password);
+			ps.setInt(3, password);
 			ps.setInt(4, AccountNo);
 			ps.setInt(5, Amount);
 			ps.setInt(6, Trans_ID);
@@ -96,7 +96,7 @@ public class AccountantDaoImplement implements AccountantDao {
 			int A = ps.executeUpdate();
 			
 			if(A >0) {
-				flag=true;
+				res++;
 			}			
 			
 			
@@ -104,7 +104,7 @@ public class AccountantDaoImplement implements AccountantDao {
 			// TODO Auto-generated catch block
 			throw new CustomerException(e.getMessage());
 		}
-		return flag;
+		return res;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class AccountantDaoImplement implements AccountantDao {
 		// TODO Auto-generated method stub
 		int res =0;
 		try(Connection conn = DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("select * from Customer where AccountNo= ?");
+			PreparedStatement ps = conn.prepareStatement("select * from Customer where AccountNo= ?");//************
 			
 			ps.setInt(1, AccountNo);
 			
@@ -179,7 +179,7 @@ public class AccountantDaoImplement implements AccountantDao {
 				int CustomerId = rs.getInt("CustomerID");
 				String Name = rs.getString("Name");
 				String Username = rs.getString("Username");
-				String password = rs.getString("password");
+			     int password = rs.getInt("password");
 				int AccountNo = rs.getInt("AccountNo");
 				int Amount = rs.getInt("Amount");//*******************koun sa cid**************
 				
@@ -211,9 +211,9 @@ public class AccountantDaoImplement implements AccountantDao {
 				String Sender = rs.getString("Sender");
 				String Receiver = rs.getString("Receiver");
 				int Amount = rs.getInt("Amount");
-				Timestamp transactionTime = rs.getTimestamp("transactionTime");
+				String date = rs.getString("date");
 				
-				Transaction transaction = new Transaction( Trans_ID, Sender, Receiver, Amount,transactionTime);
+				Transaction transaction = new Transaction( Trans_ID, Sender, Receiver, Amount,date);
 				list.add(transaction);
 			}
 			

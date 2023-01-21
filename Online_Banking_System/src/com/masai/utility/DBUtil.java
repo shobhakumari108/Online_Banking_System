@@ -10,14 +10,14 @@ public class DBUtil {
 	 
 	 
 		try {
-			Class.forName("com.mysql.oj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	
 	 
-	 String url = "jdbc:mysql://localhost:3306/OnlineBankingSystem";
+	 String url = "jdbc:mysql://localhost:3306/onlinebankingsystem";
 	 
 	 try {
 		conn = DriverManager.getConnection(url,"root","Tuesday@1384");
