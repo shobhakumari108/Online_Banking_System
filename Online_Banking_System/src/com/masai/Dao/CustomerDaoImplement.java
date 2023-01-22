@@ -81,7 +81,7 @@ public class CustomerDaoImplement implements CustomerDao{
 		
 		try(Connection conn = DBUtil.provideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("insert into transSaction (Sender,Receiver,Amount,data)  values(?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into transaction (Sender,Receiver,Amount,data)  values(?,?,?,?)");
 			
 			ps.setString(1, SUsername);
 			ps.setString(2, RUsername);
@@ -154,7 +154,7 @@ try(Connection conn = DBUtil.provideConnection()){
 		int res = 0;
 		try (Connection conn = DBUtil.provideConnection()) {
 
-			PreparedStatement ps = conn.prepareStatement("update Customer set Amount =A mount-? where Username=? and Amount-? >= 0 ");
+			PreparedStatement ps = conn.prepareStatement("update Customer set Amount=Amount-? where Username=? and Amount-?>=0 ");
 			
 			ps.setInt(1, Amount);			
 			ps.setString(2, Username);
@@ -202,7 +202,7 @@ try(Connection conn = DBUtil.provideConnection()){
 		List<Transaction> list = new ArrayList<>();
 		
 		try (Connection conn = DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("select * from transSaction where Sender=? ");
+			PreparedStatement ps = conn.prepareStatement("select * from tranSaction where Sender=? ");
 			
 			ps.setString(1, Username);
 			ResultSet rs = ps.executeQuery();

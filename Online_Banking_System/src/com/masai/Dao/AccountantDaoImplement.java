@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.masai.custom.consolecolor;
+
 //import javax.security.auth.login.AccountException;
 
 import com.masai.exception.AccountntException;
@@ -63,7 +65,7 @@ public class AccountantDaoImplement implements AccountantDao {
 			if(A > 0) {
 		      res++;
 			}else {
-				throw new CustomerException("username or passwod is wrong...");
+				throw new CustomerException(consolecolor.RED+"username or passwod is wrong..."+consolecolor.RESET);
 			}
 			
 		} catch (SQLException e) {
@@ -74,7 +76,7 @@ public class AccountantDaoImplement implements AccountantDao {
 	}
 
 	@Override
-	public int UpdateCusomer(String Name, String Username, int password, int AccountNo, int Amount, int Trans_ID)
+	public int UpdateCusomer(String Name, String Username, int password, int AccountNo, int Amount, int CustomerID)
 			throws CustomerException {
 		// TODO Auto-generated method stub
 		int res=0;
@@ -91,7 +93,7 @@ public class AccountantDaoImplement implements AccountantDao {
 			ps.setInt(3, password);
 			ps.setInt(4, AccountNo);
 			ps.setInt(5, Amount);
-			ps.setInt(6, Trans_ID);
+			ps.setInt(6, CustomerID);
 			
 			int A = ps.executeUpdate();
 			
@@ -112,7 +114,7 @@ public class AccountantDaoImplement implements AccountantDao {
 		// TODO Auto-generated method stub
 		int res =0;
 		try(Connection conn = DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("delete from Customer where AccountNo = ?");//***************************
+			PreparedStatement ps = conn.prepareStatement("delete from Customer where AccountNo = ?");
 			
 			ps.setInt(1, AccountNo);
 			int A = ps.executeUpdate();
@@ -135,13 +137,13 @@ public class AccountantDaoImplement implements AccountantDao {
 		// TODO Auto-generated method stub
 		int res =0;
 		try(Connection conn = DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("select * from Customer where AccountNo= ?");//************
+			PreparedStatement ps = conn.prepareStatement("select * from Customer where AccountNo= ?");
 			
 			ps.setInt(1, AccountNo);
 			
 			ResultSet rs = ps.executeQuery();
 			
-			if(res > 0) {
+			if(rs.next()) {
 				res++;
 				System.out.println(" ContomerId is" + rs.getInt("CustomerID") 
 				+ "name is : " + rs.getString("Name") 
@@ -181,7 +183,7 @@ public class AccountantDaoImplement implements AccountantDao {
 				String Username = rs.getString("Username");
 			     int password = rs.getInt("password");
 				int AccountNo = rs.getInt("AccountNo");
-				int Amount = rs.getInt("Amount");//*******************koun sa cid**************
+				int Amount = rs.getInt("Amount");
 				
 				Customer customer = new Customer(CustomerId , Name, Username, password, AccountNo, Amount);
 				list.add(customer);
@@ -211,7 +213,7 @@ public class AccountantDaoImplement implements AccountantDao {
 				String Sender = rs.getString("Sender");
 				String Receiver = rs.getString("Receiver");
 				int Amount = rs.getInt("Amount");
-				String date = rs.getString("date");
+				String date = rs.getString("data");
 				
 				Transaction transaction = new Transaction( Trans_ID, Sender, Receiver, Amount,date);
 				list.add(transaction);

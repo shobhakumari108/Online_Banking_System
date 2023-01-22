@@ -17,7 +17,7 @@ public interface AccountantDao {
 	
 	public int InsertCustomer(String Name,String Username, int password,int AccountNo,int Amount) throws CustomerException;
 	
-	public int UpdateCusomer(String Name,String Username, int password,int AccountNo,int Amount, int Trans_ID)  throws CustomerException;
+	public int UpdateCusomer(String Name,String Username, int password,int AccountNo,int Amount, int CustomerID)  throws CustomerException;
 	
 	public int delectCustomer(int AccountNo) throws CustomerException;
 	

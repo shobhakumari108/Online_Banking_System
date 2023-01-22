@@ -11,8 +11,7 @@ public class Main {
 	public static void main(String[] args) throws AccountntException, CustomerException, TransactionException {
 
 		Scanner scanner = new Scanner(System.in);
-
-		AccountantMainUsecase Acc = new AccountantMainUsecase();
+				AccountantMainUsecase Acc = new AccountantMainUsecase();
 		CustomerMainUsecase Cust = new CustomerMainUsecase();
 		while (true) {
 			int num = Acc.StartFunction();
