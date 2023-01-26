@@ -10,8 +10,8 @@ password int unique
 
 2.
 create Table Customer(
-CustomerID int  primary key Auto_increment,
-name varchar(30) ,
+CustomerID int  Auto_increment,
+name varchar(30) primary key ,
 UserName varchar(30) unique,
 password int unique,
 AccountNo int unique,
